@@ -1,0 +1,25 @@
+Goals for game, as you figure things out, just mark with "--". Add what needs to be done.
+
+
+Player
+-Player can jump
+
+Enemies
+
+triangle
+- move in a curved T
+- attack using curved energy wave
+
+
+Tank
+-cross movement, can rotate front for attacking,
+attack using big bullet.
+
+bigman
+- working on it.
+
+Scene
+- demo level
+
+Areas
+- To be Determined.
