@@ -38,15 +38,11 @@ public class CherControl : MonoBehaviour {
 			weapTrigger.collider.enabled = false;
 		}*/
 		
-		if(rigidbody.velocity.y == 0){
-			ariel = false;
-		}
-		
-		float moveZ = Input.GetAxis("Vertical")*Time.deltaTime*5;
-		float moveX = Input.GetAxis ("Horizontal")*Time.deltaTime*5;
+		float moveZ = Input.GetAxis("Vertical")*5;
+		float moveX = Input.GetAxis ("Horizontal")*5;
 		
 		transform.LookAt (new Vector3(moveX, 0, moveZ)+this.transform.position);
-		rigidbody.MovePosition (rigidbody.position+new Vector3(moveX, 0, moveZ));
+		rigidbody.velocity = new Vector3(moveX, rigidbody.velocity.y, moveZ);
 		dude.transform.Rotate(new Vector3(rigidbody.velocity.z, 0, -rigidbody.velocity.x), Space.World);
 		
 		if(Input.GetButton ("Attack")){
@@ -59,12 +55,12 @@ public class CherControl : MonoBehaviour {
 			weapTrigger.collider.enabled = false;
 		}
 		
-		if(Input.GetButton ("Jump") && !ariel){
-			ariel = true;
+		if(Input.GetButton ("Jump")){
+			rigidbody.velocity = Vector3.up*5;
 		}
+	}
 		
-		if(ariel){
-			//rigidbody.MovePosition(rigidbody.position+(Vector3.up*(
-		}
+	void OnGUI(){
+		GUI.Box (new Rect(20, 20, 100, 100), rigidbody.velocity.ToString ());
 	}
 }
