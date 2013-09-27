@@ -5,7 +5,7 @@ public class CherControl : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-	
+		collider.material.dynamicFriction = 1;
 	}
 	
 	public GameObject dude;
@@ -14,35 +14,22 @@ public class CherControl : MonoBehaviour {
 	bool ariel;
 	float vertMove;
 	
+	public int incSpeed;
+	public int maxSpeed;
+	//int horzSpeed;
+	//int vertSpeed;
+	
 	// Update is called once per frame
-	void FixedUpdate () {
-		/*CharacterController controller = GetComponent<CharacterController>();
-		
-		float moveZ = Input.GetAxis("Vertical")*5;
-		float rotY = Input.GetAxis ("Horizontal")*-5;
-		float moveX = Input.GetAxis ("Horizontal")*5;
-		float rotX = Input.GetAxis ("Vertical")*5;
-		
-		transform.LookAt (new Vector3(moveX, 0, moveZ)+this.transform.position);
-		controller.SimpleMove (new Vector3(moveX, 0, moveZ));
-		dude.transform.Rotate(new Vector3(controller.velocity.z, 0, -controller.velocity.x), Space.World);
-		//dude.transform.Rotate (new Vector3(rotX, 0, rotY), Space.World);
-		
-		if(Input.GetButton ("Attack")){
-			weapon.animation.Play ("Attack");
+	void FixedUpdate () {		
+		if(Input.GetButton("Horizontal") && Mathf.Abs (rigidbody.velocity.x) < maxSpeed){
+			rigidbody.velocity = new Vector3((rigidbody.velocity.x+(incSpeed*(int)Input.GetAxis("Horizontal"))), rigidbody.velocity.y, rigidbody.velocity.z);
 		}
 		
-		if(weapon.animation.isPlaying){
-			weapTrigger.collider.enabled = true;
-		}else{
-			weapTrigger.collider.enabled = false;
-		}*/
+		if(Input.GetButton ("Vertical") && Mathf.Abs (rigidbody.velocity.z) < maxSpeed){
+			rigidbody.velocity = new Vector3(rigidbody.velocity.x, rigidbody.velocity.y, (rigidbody.velocity.z+(incSpeed*(int)Input.GetAxis("Vertical"))));
+		}
 		
-		float moveZ = Input.GetAxis("Vertical")*5;
-		float moveX = Input.GetAxis ("Horizontal")*5;
-		
-		transform.LookAt (new Vector3(moveX, 0, moveZ)+this.transform.position);
-		rigidbody.velocity = new Vector3(moveX, rigidbody.velocity.y, moveZ);
+		//transform.LookAt (+this.transform.position);
 		dude.transform.Rotate(new Vector3(rigidbody.velocity.z, 0, -rigidbody.velocity.x), Space.World);
 		
 		if(Input.GetButton ("Attack")){
@@ -56,7 +43,7 @@ public class CherControl : MonoBehaviour {
 		}
 		
 		if(Input.GetButton ("Jump")){
-			rigidbody.velocity = Vector3.up*5;
+			rigidbody.velocity = Vector3.up*10;
 		}
 	}
 		
