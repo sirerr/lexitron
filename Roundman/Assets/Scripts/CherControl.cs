@@ -5,7 +5,7 @@ public class CherControl : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		collider.material.dynamicFriction = 1;
+		Physics.gravity = new Vector3(0, grav, 0);
 	}
 	
 	public GameObject dude;
@@ -16,20 +16,38 @@ public class CherControl : MonoBehaviour {
 	
 	public int incSpeed;
 	public int maxSpeed;
-	//int horzSpeed;
-	//int vertSpeed;
+	public int jumpPow;
+	public float grav;
+	float horzSpeed;
+	float vertSpeed;
 	
 	// Update is called once per frame
 	void FixedUpdate () {		
-		if(Input.GetButton("Horizontal") && Mathf.Abs (rigidbody.velocity.x) < maxSpeed){
-			rigidbody.velocity = new Vector3((rigidbody.velocity.x+(incSpeed*(int)Input.GetAxis("Horizontal"))), rigidbody.velocity.y, rigidbody.velocity.z);
+		/*if(Input.GetButton("Horizontal") && Mathf.Abs (rigidbody.velocity.x) < maxSpeed){
+			horzSpeed += incSpeed*Input.GetAxis("Horizontal");
+		}else if(Mathf.Abs (horzSpeed) > 0 && Mathf.Abs (horzSpeed) < 1){
+			horzSpeed = 0;
+		}else if(horzSpeed < 0){
+			horzSpeed += incSpeed;
+		}else if(horzSpeed > 0){
+			horzSpeed -= incSpeed;
 		}
 		
 		if(Input.GetButton ("Vertical") && Mathf.Abs (rigidbody.velocity.z) < maxSpeed){
-			rigidbody.velocity = new Vector3(rigidbody.velocity.x, rigidbody.velocity.y, (rigidbody.velocity.z+(incSpeed*(int)Input.GetAxis("Vertical"))));
-		}
+			vertSpeed += incSpeed*Input.GetAxis ("Vertical");
+		}else if(Mathf.Abs (vertSpeed) > 0 && Mathf.Abs (vertSpeed) < 1){
+			vertSpeed = 0;
+		}else if(vertSpeed < 0){
+			vertSpeed += incSpeed;
+		}else if(vertSpeed > 0){
+			vertSpeed -= incSpeed;
+		}*/
+		
+		horzSpeed = incSpeed*Input.GetAxis ("Horizontal");
+		vertSpeed = incSpeed*Input.GetAxis ("Vertical");
 		
 		//transform.LookAt (+this.transform.position);
+		rigidbody.velocity = new Vector3(horzSpeed, rigidbody.velocity.y, vertSpeed);
 		dude.transform.Rotate(new Vector3(rigidbody.velocity.z, 0, -rigidbody.velocity.x), Space.World);
 		
 		if(Input.GetButton ("Attack")){
@@ -42,8 +60,8 @@ public class CherControl : MonoBehaviour {
 			weapTrigger.collider.enabled = false;
 		}
 		
-		if(Input.GetButton ("Jump")){
-			rigidbody.velocity = Vector3.up*10;
+		if(Input.GetButtonDown ("Jump")){
+			rigidbody.velocity = Vector3.up*jumpPow;
 		}
 	}
 		
