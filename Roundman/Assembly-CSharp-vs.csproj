@@ -37,10 +37,10 @@
     <Reference Include="System.XML" />
 	<Reference Include="System.Core" />
 	<Reference Include="UnityEngine">
-	  <HintPath>C:/Program Files (x86)/Unity/Editor/Data/Managed/UnityEngine.dll</HintPath>
+	  <HintPath>C:/Program Files/Unity/Editor/Data/Managed/UnityEngine.dll</HintPath>
 	</Reference>
 	<Reference Include="UnityEditor">
-	  <HintPath>C:/Program Files (x86)/Unity/Editor/Data/Managed/UnityEditor.dll</HintPath>
+	  <HintPath>C:/Program Files/Unity/Editor/Data/Managed/UnityEditor.dll</HintPath>
 	</Reference>
   </ItemGroup>
   <ItemGroup>
@@ -660,6 +660,7 @@
      <Compile Include="Assets\PlayMaker\Include\iTweenFSMEvents.cs" />
      <Compile Include="Assets\Scripts\CherControl.cs" />
      <Compile Include="Assets\Scripts\EnemControl.cs" />
+     <Compile Include="Assets\Scripts\PlanePhysics.cs" />
      <Compile Include="Assets\Scripts\WeapHit.cs" />
      <Compile Include="Assets\iTween\iTween.cs" />
      <None Include="Assets\Photon Unity Networking\PlayMaker\ReleaseNotes.txt" />
